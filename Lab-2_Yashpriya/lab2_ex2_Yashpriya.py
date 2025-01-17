@@ -12,25 +12,33 @@ from sklearn.model_selection import cross_validate
 
 ### EDA - Exploratory Data Analysis
 
+# fetch_california_housing: A function from sklearn.datasets to download the California Housing dataset. 
+# as_frame=True: This ensures that the dataset is returned as Pandas DataFrame
 california_housing = fetch_california_housing(as_frame=True)
-# .DESCR - Gives the description of the dataset
+# .DESCR attribute: Contains the textual description/overview of the dataset
 print(california_housing.DESCR)
 
-# Overview of the entire dataset
+# Displays the first 5 rows of the dataset's feature set (i.e., attributes of each sample, excluding the target variable)
 print(california_housing.frame.head())
 
+# Displays the first 5 rows of the feature data (without target variable - MedHouseVal) to check the str. & types of features.
 print(california_housing.data.head())
 
-# Target (median of the house value) to be predicted
+# Shows the first 5 values of the target (MedHouseVal)  
 print(california_housing.target.head())
 
-# Will tell the data types, no. of samples, no. of features, and if the dataset contains any missing value
+# Will provide summary of dataset, i.e., data types, no. of samples (rows), no. of features (columns), and if the dataset contains any missing value (count of non-null values for each column)
 california_housing.frame.info()
 
-# Histogram plot - distribution of all the features
+# .hist() - creates histogram for all the features in the dataset 
+# figsize=(12, 10): Specifies the size of the figure (12 inches by 10 inches)
+# bins=30: More bins allow finer granularity in the distribution
+# edegecolor="black": Adds black edges to the histogram bars for better visibility
 california_housing.frame.hist(figsize=(12, 10), bins=30, edgecolor="black")
+# subplots_adjust(): hspace (space b/w rows), wspace (space b/w columns) - adjusts the spacing b/w subplots in the figure
 plt.subplots_adjust(hspace=0.7, wspace=0.4)
 plt.plot()
+# Displays the histogram
 plt.show()
 
 # Since, average rooms, average bedrooms, average occupation, and population has large range of the data with unnoticeable bin for the largest values.
