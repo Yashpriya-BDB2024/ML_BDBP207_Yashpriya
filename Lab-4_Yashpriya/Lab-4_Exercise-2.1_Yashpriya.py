@@ -1,10 +1,9 @@
-# Use your implementation and train ML models for both california housing and simulated datasets and compare your results with the scikit-learn models.
 import random
-
 import pandas as pd
 import numpy as np
 
-# Training the ML model using Python -
+### Training the ML model using Python -
+
 data = pd.read_csv("simulated_data_multiple_linear_regression_for_ML.csv")
 data = data.sample(frac=1).reset_index(drop=True)   # jumbling the samples
 X = data[['age', 'BMI', 'BP', 'blood_sugar', 'Gender']].values
