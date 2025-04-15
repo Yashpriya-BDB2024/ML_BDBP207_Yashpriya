@@ -37,18 +37,15 @@ X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
 # Training the model -
-bag_reg = BaggingClassifier(estimator=DecisionTreeClassifier(max_depth=5), n_estimators=100, max_features=1.0, max_samples=1.0, bootstrap_features=False, bootstrap=True, random_state=42, n_jobs=-1)
-bag_reg.fit(X_train_scaled, y_train)
-y_pred = bag_reg.predict(X_test_scaled)
+bag_clf = BaggingClassifier(estimator=DecisionTreeClassifier(max_depth=5), n_estimators=100, max_features=1.0, max_samples=1.0, bootstrap_features=False, bootstrap=True, random_state=42, n_jobs=-1)
+bag_clf.fit(X_train_scaled, y_train)
+y_pred = bag_clf.predict(X_test_scaled)
 print("Predicted y-values: ")
 print(y_pred)
 
 # Evaluate the model -
 accuracy = accuracy_score(y_test, y_pred)
-print("Accuracy (without K-fold): ", accuracy*100,"%")
+print("Accuracy: ", accuracy*100,"%")
 class_report = classification_report(y_test, y_pred)
 print("Classification Report: ")
 print(class_report)
-
-
-
