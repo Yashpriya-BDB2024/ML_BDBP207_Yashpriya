@@ -43,8 +43,12 @@ def plot_decision_boundary(clf, X, y, title):
     plt.ylabel("x2")
     plt.show()
 
-plot_decision_boundary(rbf_svm, X, y, "SVM with RBF Kernel")
-plot_decision_boundary(poly_svm, X, y, "SVM with Polynomial Kernel (degree=3)")
+def main():
+    plot_decision_boundary(rbf_svm, X, y, "SVM with RBF Kernel")
+    plot_decision_boundary(poly_svm, X, y, "SVM with Polynomial Kernel (degree=3)")
+
+if __name__ == "__main__":
+    main()
 
 # Interpretation:
 # RBF Kernel: Smooth & circular boundary, very high flexibility, handles non-linear data very well, best fit for this dataset, overfitting risk is low (with proper gamma).
