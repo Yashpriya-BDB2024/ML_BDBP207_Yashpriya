@@ -1,3 +1,5 @@
+### Implement bagging regressor without using scikit-learn.
+
 import numpy as np
 from sklearn.datasets import load_diabetes
 from sklearn.model_selection import KFold, train_test_split
