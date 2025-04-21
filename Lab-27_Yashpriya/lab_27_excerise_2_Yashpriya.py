@@ -18,9 +18,9 @@ def find_eigenvalues_2by2(a,b,c,d):
     trace = a + d
     determinant = a * d - b * c
     discriminant = trace**2 - 4 * determinant
-    sqrt_det = discriminant**0.5
-    lambda1 = (trace + sqrt_det) / 2
-    lambda2 = (trace - sqrt_det) / 2
+    sqrt_disc = discriminant**0.5
+    lambda1 = (trace + sqrt_disc) / 2
+    lambda2 = (trace - sqrt_disc) / 2
     return lambda1, lambda2
 
 def main():
