@@ -10,12 +10,11 @@ Different types of NB classifiers in Scikit-learn:
 5. CategoricalNB: For features that are categorical but not text.
 """
 
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
-from sklearn.naive_bayes import MultinomialNB
+from sklearn.naive_bayes import MultinomialNB, ComplementNB
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix, ConfusionMatrixDisplay
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -24,13 +23,16 @@ def load_data(filepath):
     return df
 
 def perform_eda(df):
-    eda_results = {}
-    eda_results['head'] = df.head()
-    eda_results['missing_values'] = df.isnull().sum()
+    print("First few rows of the dataset:")
+    print(df.head())
+    print("\nMissing values:")
+    print(df.isnull().sum())
     df['message_length'] = df['v2'].apply(len)   # v2 is the text column (email message) in the dataset.
-    eda_results['length_stats'] = df['message_length'].describe()   # Message length statistics
-    eda_results['class_distribution'] = df['v1'].value_counts()   # v1 is the target column in the dataset.
-    return df, eda_results
+    print("\nMessage length statistics:")
+    print(df['message_length'].describe())
+    print("\nClass distribution (Ham vs Spam):")   # v1 is the target column in the dataset.
+    print(df['v1'].value_counts())
+    return df
 
 def preprocess_data(df, use_tfidf=True):
     # Label Encoding (bec. model needs numeric targets) -
@@ -63,13 +65,12 @@ def evaluate_model(model, X_test, y_test):
     cm = confusion_matrix(y_test, y_pred)
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=["Ham", "Spam"])
     disp.plot(cmap='Blues')
-    plt.title("Confusion Matrix")
     plt.show()
     return accuracy, report
 
 def main(filepath):
     df = load_data(filepath)
-    df, _ = perform_eda(df)
+    df = perform_eda(df)
     X, y = preprocess_data(df)
     X_train, X_test, y_train, y_test, vectorizer = split_and_vectorize(X, y)
     model = train_model(X_train, y_train)
